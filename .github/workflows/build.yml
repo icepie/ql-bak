@@ -22,9 +22,12 @@ jobs:
       - name: copy to static repo
         env: 
           # GITHUB_REPO: gitee.com/whyour/qinglong-static
-          GITHUB_REPO: github.com/icepie/ql
+          GITHUB_REPO: icepie/ql
         run: |
-          git clone ${GITHUB_REPO} static
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          git clone git@github.com:${GITHUB_REPO} static
           cd ./static 
           cp -rf ../dist ./ && cp -rf ../build ./
           git init && git add .
