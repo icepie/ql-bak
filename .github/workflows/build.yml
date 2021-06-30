@@ -24,7 +24,7 @@ jobs:
           # GITHUB_REPO: gitee.com/whyour/qinglong-static
           GITHUB_REPO: github.com/icepie/ql
         run: |
-          mkdir -p static
+          git clone ${GITHUB_REPO} static
           cd ./static 
           cp -rf ../dist ./ && cp -rf ../build ./
           git init && git add .
